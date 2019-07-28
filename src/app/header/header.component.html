@@ -1,28 +1,22 @@
 <mat-toolbar color="primary">
-  <span>
-    <a href="#">EatSmart Meal Management</a>
-  </span>
 
-  <span>
-    <a href="#" (click)="onSelect('recipe')">
-            Recipes
-          </a>
-  </span>
+  <span>EatSmart Meal Management</span>
 
-  <span>
-    <a href="#" (click)="onSelect('shopping-list')">
-            Shopping List
-          </a>
-  </span>
+  <a mat-button href="#" (click)="onSelect('recipe')">
+    Recipes
+  </a>
+
+  <a mat-button href="#" (click)="onSelect('shopping-list')">
+    Shopping List
+  </a>
 
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <span>
-    <button mat-button [mat-menu-trigger-for]="Option">
-      Option
-    </button>
-  </span>
+  <button mat-button [mat-menu-trigger-for]="Option">
+    Option
+  </button>
+
 </mat-toolbar>
 <mat-menu #Option="matMenu">
   <button mat-menu-item>Save Data</button>

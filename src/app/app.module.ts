@@ -5,7 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {MatMenuModule, MatToolbarModule} from "@angular/material";
+import {MatButtonModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 
 
 import { AppComponent } from './app.component';
@@ -38,7 +38,8 @@ import {DropdownDirective} from "./shared/dropdown.directive";
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
