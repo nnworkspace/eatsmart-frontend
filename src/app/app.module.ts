@@ -4,6 +4,8 @@ import { FormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {FlexLayoutModule} from "@angular/flex-layout";
+
 import { AppComponent } from './app.component';
 import {HeaderComponent} from "./header/header.component";
 import { RecipesComponent } from './recipes/recipes.component';
@@ -30,7 +32,8 @@ import {DropdownDirective} from "./shared/dropdown.directive";
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
