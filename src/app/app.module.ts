@@ -8,11 +8,12 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {
   MatButtonModule,
   MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
   MatListModule,
   MatMenuModule,
   MatToolbarModule
 } from "@angular/material";
-
 
 import { AppComponent } from './app.component';
 import {HeaderComponent} from "./header/header.component";
@@ -47,7 +48,9 @@ import {DropdownDirective} from "./shared/dropdown.directive";
     MatMenuModule,
     MatButtonModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
