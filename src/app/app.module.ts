@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {
   MatButtonModule,
+  MatDividerModule,
+  MatListModule,
   MatMenuModule,
   MatToolbarModule
 } from "@angular/material";
@@ -43,7 +45,9 @@ import {DropdownDirective} from "./shared/dropdown.directive";
     FlexLayoutModule,
     MatToolbarModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
