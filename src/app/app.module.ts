@@ -5,7 +5,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {MatButtonModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatMenuModule,
+  MatToolbarModule
+} from "@angular/material";
 
 
 import { AppComponent } from './app.component';
