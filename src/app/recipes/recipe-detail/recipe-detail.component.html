@@ -1,3 +1,4 @@
+<br>
 <div class="row">
   <div class="col-xs-12">
     <img [src]="recipe.imageUrl"
@@ -11,30 +12,28 @@
     <h1>{{ recipe.name }}</h1>
   </div>
 </div>
-<hr>
-<div class="row">
-  <div class="col-xs-12">
-    <div
-      class="btn-group"
-      appDropdown>
-      <button
-        type="button"
-        class="btn btn-primary dropdown-toggle">
-        Manage Recipe
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">Add Ingredients to Shopping List</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+
+<mat-divider></mat-divider>
+<br>
+
+
+<mat-menu #recipeOptions="matMenu">
+  <button mat-menu-item>Add Ingredients to Shopping List</button>
+  <button mat-menu-item>Edit Recipe</button>
+  <button mat-menu-item>Delete Recipe</button>
+</mat-menu>
+<button mat-raised-button [matMenuTriggerFor]="recipeOptions" color="primary">
+  Manage Recipe
+</button>
+
+<br>
+
 <div class="row">
   <div class="col-xs-12">
     {{ recipe.description }}
   </div>
 </div>
+<br>
 <div class="row">
   <div class="col-xs-12">
     Ingredients
