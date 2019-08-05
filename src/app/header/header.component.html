@@ -2,13 +2,8 @@
 
   <span>EatSmart Meal Management</span>
 
-  <a mat-button href="#" (click)="onSelect('recipe')">
-    Recipes
-  </a>
-
-  <a mat-button href="#" (click)="onSelect('shopping-list')">
-    Shopping List
-  </a>
+  <a mat-button routerLink="/recipes" routerLinkActive="active">Recipes</a>
+  <a mat-button routerLink="/shopping-list" routerLinkActive="active">Shopping List</a>
 
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
