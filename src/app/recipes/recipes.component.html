@@ -1,16 +1,8 @@
 <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
   <div fxFlex="30" fxFlex.xs="70">
-    <app-recipe-list>
-    </app-recipe-list>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div fxFlex="70" fxFlex.xs="30">
-    <app-recipe-detail
-      *ngIf="selectedRecipe else infoText"
-      [recipe]="selectedRecipe"></app-recipe-detail>
-    <ng-template #infoText>
-      <p>
-        Please select a recipe!
-      </p>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

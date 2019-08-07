@@ -25,6 +25,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
 import {AppRoutingModule} from "./app-routing.module";
+import { RecipeHomeComponent } from './recipes/recipe-home/recipe-home.component';
 
 
 
@@ -37,7 +38,8 @@ import {AppRoutingModule} from "./app-routing.module";
     RecipeDetailComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    RecipeHomeComponent
   ],
   imports: [
     BrowserModule,
