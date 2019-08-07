@@ -1,4 +1,4 @@
-<mat-list-item style="cursor: pointer">
+<mat-list-item [routerLink]="[index]" routerLinkActive="active-link" style="cursor: pointer">
   <img matListAvatar src="{{ recipe.imageUrl }}" alt="{{ recipe.name }}">
   <h3 matLine> {{ recipe.name }} </h3>
   <p matLine> {{ recipe.description }} </p>
