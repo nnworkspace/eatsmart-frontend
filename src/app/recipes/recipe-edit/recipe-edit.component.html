@@ -1,1 +1,45 @@
-<p>recipe-edit works!</p>
+<form>
+  <button mat-raised-button color="primary">Save</button>
+  <button mat-raised-button color="warn">Cancel</button>
+
+  <br><br>
+
+  <mat-form-field>
+    <input matInput type="text" id="name" name="name"
+           required placeholder="name">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput type="url" id="imageUrl" name="imageUrl"
+           required placeholder="image URL">
+  </mat-form-field>
+  <br>
+  <img src="" alt="preview of the recipe photo">
+
+  <br>
+  <mat-form-field>
+    <textarea matInput type="text" id="description" name="description"
+              rows="6" required placeholder="description"></textarea>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="ingredient name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" id="amount"
+           pattern="^[1-9]+[0-9]*$" placeholder="amount">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text"
+           placeholder="unit" >
+  </mat-form-field>
+
+  <button mat-button color="warn">x</button>
+
+</form>
