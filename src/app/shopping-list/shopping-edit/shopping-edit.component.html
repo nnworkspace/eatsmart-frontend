@@ -1,28 +1,32 @@
 <br>
 <div class="container">
-  <form>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <mat-form-field>
-      <input matInput type="text" placeholder="name" id="name" #nameInput>
+      <input matInput ngModel type="text" id="name" name="name"
+             required placeholder="name">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="number" placeholder="amount" id="amount" #amountInput>
+      <input matInput ngModel type="number" id="amount" name="amount"
+             required pattern="^[1-9]+[0-9]*$" placeholder="amount">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="text" placeholder="unit" id="unit" #unitInput>
+      <input matInput ngModel type="text" id="unit" name="unit"
+             required placeholder="unit" >
     </mat-form-field>
 
     <br>
 
     <div class="row">
       <div class="col-xs-12">
-        <button mat-raised-button color="primary"
-                type="submit" (click)="onAddItem()">
-          Add
+        <button mat-raised-button type="submit" [disabled]="!f.valid"
+                color="primary" >
+          {{ editMode ? 'Update' : 'Add' }}
         </button>
-        <button mat-raised-button color="warn">Delete Item</button>
-        <button mat-raised-button color="accent">Clear</button>
+        <button mat-raised-button (click)="onDelete()" *ngIf="editMode"
+                color="warn">Delete Item</button>
+        <button mat-raised-button (click)="onClear()" color="accent">Clear</button>
       </div>
     </div>
   </form>
