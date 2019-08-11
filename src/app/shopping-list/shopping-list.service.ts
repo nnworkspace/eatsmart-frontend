@@ -25,19 +25,7 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient[]) {
     // TODO: add logic to group the ingredients by name
-    for (let ingre of ingredients) {
-      console.log('name: ' + ingre.name);
-      console.log('amount: ' + ingre.amount);
-      console.log('amountUnit: ' + ingre.amountUnit);
-    }
     this.ingredients.push(...ingredients);
-
-    console.log('after push: #########################');
-    for (let ingre of this.ingredients) {
-      console.log('name: ' + ingre.name);
-      console.log('amount: ' + ingre.amount);
-      console.log('amountUnit: ' + ingre.amountUnit);
-    }
     this.notifyListObservers();
   }
 
