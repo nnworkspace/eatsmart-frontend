@@ -45,7 +45,7 @@
                placeholder="Unit">
       </mat-form-field>
 
-      <button mat-button color="warn">x</button>
+      <button mat-button type="button" (click)="onDeleteIngredient(idx)" color="warn">x</button>
     </div>
     <button mat-raised-button type="button" (click)="onAddIngredient()" color="primary">Add Ingredient</button>
   </div>
