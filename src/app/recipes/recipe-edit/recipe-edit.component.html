@@ -13,10 +13,10 @@
 
   <mat-form-field>
     <input matInput type="url" id="imageUrl" name="imageUrl"
-           formControlName="imageUrl" placeholder="imageUrl">
+           formControlName="imageUrl" #imageUrl placeholder="imageUrl">
   </mat-form-field>
   <br>
-  <img [src]="" alt="preview of the recipe photo">
+  <img [src]="imageUrl.value" alt="preview of the recipe photo">
 
   <br>
   <mat-form-field>
