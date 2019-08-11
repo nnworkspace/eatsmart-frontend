@@ -20,7 +20,7 @@
 <mat-menu #recipeOptions="matMenu">
   <button mat-menu-item (click)="onAddToShoppingList()">Add Ingredients to Shopping List</button>
   <button mat-menu-item (click)="onEditRecipe()">Edit Recipe</button>
-  <button mat-menu-item>Delete Recipe</button>
+  <button mat-menu-item (click)="onDeleteRecipe()">Delete Recipe</button>
 </mat-menu>
 <button mat-raised-button [matMenuTriggerFor]="recipeOptions" color="primary">
   Manage Recipe
