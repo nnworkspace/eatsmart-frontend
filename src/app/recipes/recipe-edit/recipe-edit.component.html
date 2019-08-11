@@ -25,22 +25,27 @@
     </textarea>
   </mat-form-field>
 
+  <h4>Ingredients:</h4>
   <br>
 
-  <mat-form-field>
-    <input matInput type="text" placeholder="ingredient name">
-  </mat-form-field>
+  <div formArrayName="ingredients">
+    <div *ngFor="let ctrl of ingredientCtrl, let idx = index"
+          [formGroupName]="idx">
+      <mat-form-field>
+        <input matInput type="text" formControlName="ingreName" placeholder="Name">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="number" id="amount"
-           pattern="^[1-9]+[0-9]*$" placeholder="amount">
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" id="amount" formControlName="ingreAmount"
+               pattern="^[1-9]+[0-9]*$" placeholder="Amount">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="text"
-           placeholder="unit" >
-  </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="ingreUnit"
+               placeholder="Unit">
+      </mat-form-field>
 
-  <button mat-button color="warn">x</button>
-
+      <button mat-button color="warn">x</button>
+    </div>
+  </div>
 </form>
