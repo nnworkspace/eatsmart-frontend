@@ -32,16 +32,16 @@
     <div *ngFor="let ctrl of ingredientCtrl, let idx = index"
           [formGroupName]="idx">
       <mat-form-field>
-        <input matInput type="text" formControlName="ingreName" placeholder="Name">
+        <input matInput type="text" formControlName="name" placeholder="Name">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="number" id="amount" formControlName="ingreAmount"
+        <input matInput type="number" id="amount" formControlName="amount"
                placeholder="Amount">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" formControlName="ingreUnit"
+        <input matInput type="text" formControlName="amountUnit"
                placeholder="Unit">
       </mat-form-field>
 
