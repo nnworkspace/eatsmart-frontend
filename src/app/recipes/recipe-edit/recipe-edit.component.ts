@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RecipeService} from "../recipe.service";
+import {Ingredient} from "../../shared/ingredient.model";
 
 @Component({
   selector: 'app-recipe-edit',
@@ -14,7 +15,8 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -44,20 +46,16 @@ export class RecipeEditComponent implements OnInit {
       desc = recipe.description;
       if (recipe['ingredients']) {
         for (let ingre of recipe.ingredients) {
-          ingredients.push(new FormGroup({
-            'ingreName': new FormControl(ingre.name),
-            'ingreAmount': new FormControl(ingre.amount),
-            'ingreUnit': new FormControl(ingre.amountUnit)
-          }));
+          ingredients.push(this.buildFormGroupIngredients(ingre));
         }
       }
     }
 
     this.recipeForm = new FormGroup({
-      'name': new FormControl(recipeName),
-      'imageUrl': new FormControl(recipeUrl),
-      'description': new FormControl(desc),
-      'ingredients': ingredients
+        'name': new FormControl(recipeName, Validators.required),
+        'imageUrl': new FormControl(recipeUrl, Validators.required),
+        'description': new FormControl(desc, Validators.required),
+        'ingredients': ingredients
       }
     );
   }
@@ -67,10 +65,15 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onAddIngredient() {
-    (<FormArray>this.recipeForm.get('ingredients')).push(new FormGroup({
-      'ingreName': new FormControl(),
-      'ingreAmount': new FormControl(),
-      'ingreUnit': new FormControl()
-    }));
+    (<FormArray>this.recipeForm.get('ingredients')).push(this.buildFormGroupIngredients(null));
+  }
+
+  private buildFormGroupIngredients(ingre: Ingredient): FormGroup {
+    return new FormGroup({
+      'ingreName': new FormControl(ingre ? ingre.name : null, Validators.required),
+      'ingreAmount': new FormControl(ingre ? ingre.amount : null,
+        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      'ingreUnit': new FormControl(ingre ? ingre.amountUnit : null, Validators.required)
+    })
   }
 }
