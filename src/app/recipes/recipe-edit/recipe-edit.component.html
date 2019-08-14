@@ -30,7 +30,7 @@
 
   <div formArrayName="ingredients">
     <div *ngFor="let ctrl of ingredientCtrl, let idx = index"
-          [formGroupName]="idx">
+          [formGroupName]="idx.toString()">
       <mat-form-field>
         <input matInput type="text" formControlName="name" placeholder="Name">
       </mat-form-field>
