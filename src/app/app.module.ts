@@ -46,6 +46,7 @@ import {RecipeService} from "./recipes/recipe.service";
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
