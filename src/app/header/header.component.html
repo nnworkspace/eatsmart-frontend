@@ -14,8 +14,8 @@
 
 </mat-toolbar>
 <mat-menu #Option="matMenu">
-  <button mat-menu-item>Save Data</button>
-  <button mat-menu-item>Fetch Data</button>
+  <button mat-menu-item (click)="onSaveData()">Save Data</button>
+  <button mat-menu-item (click)="onFetchData()">Fetch Data</button>
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>
 
