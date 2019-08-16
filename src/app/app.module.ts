@@ -12,6 +12,7 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
   MatToolbarModule
 } from "@angular/material";
 
@@ -28,6 +29,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import { RecipeHomeComponent } from './recipes/recipe-home/recipe-home.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {RecipeService} from "./recipes/recipe.service";
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import {RecipeService} from "./recipes/recipe.service";
     ShoppingListComponent,
     ShoppingEditComponent,
     RecipeHomeComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import {RecipeService} from "./recipes/recipe.service";
     MatListModule,
     MatDividerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   providers: [RecipeService, ShoppingListService],
   bootstrap: [AppComponent]
