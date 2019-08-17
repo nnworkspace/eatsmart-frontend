@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, tap} from "rxjs/operators";
-import {Subject, throwError} from "rxjs";
+import {BehaviorSubject, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+
 import {User} from "./user.model";
 
 export interface AuthResponseFirebase {
@@ -17,7 +18,7 @@ export interface AuthResponseFirebase {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
   private param = {'key': environment.keyFirebase};
 

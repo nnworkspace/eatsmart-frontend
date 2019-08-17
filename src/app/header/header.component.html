@@ -2,21 +2,25 @@
 
   <span>EatSmart Meal Management</span>
 
-  <a mat-button routerLink="/recipes" routerLinkActive="active-link">Recipes</a>
-  <a mat-button routerLink="/auth" routerLinkActive="active-link">Authenticate</a>
-  <a mat-button routerLink="/shopping-list" routerLinkActive="active-link">Shopping List</a>
+  <a mat-button routerLink="/recipes" *ngIf="isAuthenticated"
+     routerLinkActive="active-link">Recipes</a>
+  <a mat-button routerLink="/auth" *ngIf="!isAuthenticated"
+     routerLinkActive="active-link">Authenticate</a>
+  <a mat-button routerLink="/shopping-list" *ngIf="isAuthenticated"
+     routerLinkActive="active-link">Shopping List</a>
 
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <button mat-button [mat-menu-trigger-for]="Option">
+  <button mat-button *ngIf="isAuthenticated">Logout</button>
+  <button mat-button *ngIf="isAuthenticated" [mat-menu-trigger-for]="Option">
     Option
   </button>
 
 </mat-toolbar>
 <mat-menu #Option="matMenu">
-  <button mat-menu-item (click)="onSaveData()">Save Data</button>
   <button mat-menu-item (click)="onFetchData()">Fetch Data</button>
+  <button mat-menu-item (click)="onSaveData()">Save Data</button>
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>
 
