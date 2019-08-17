@@ -36,7 +36,17 @@ export class AuthService {
       {
         params: this.param
       })
-    .pipe(catchError(this.handleError), tap(this.handleAuthentication));
+    .pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        this.handleAuthentication(
+          resData.email,
+          resData.localId,
+          resData.idToken,
+          +resData.expiresIn
+        );
+      })
+    );
   }
 
   login(email: string, password: string) {
@@ -51,12 +61,23 @@ export class AuthService {
       {
         params: this.param
       })
-    .pipe(catchError(this.handleError), tap(this.handleAuthentication));
+    .pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        this.handleAuthentication(
+          resData.email,
+          resData.localId,
+          resData.idToken,
+          +resData.expiresIn
+        );
+      })
+    );
   }
 
-  private handleAuthentication(resData: AuthResponseFirebase) {
-    const user = new User(resData.email, resData.localId, resData.idToken,
-      this.calcExpirationDate(resData));
+  private handleAuthentication(email: string, userId: string, token: string,
+    expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
   }
 
@@ -92,9 +113,5 @@ export class AuthService {
     }
 
     return throwError(errorMsg);
-  }
-
-  private calcExpirationDate(resData: AuthResponseFirebase): Date {
-    return new Date(new Date().getTime() + +resData.expiresIn * 1000);
   }
 }
