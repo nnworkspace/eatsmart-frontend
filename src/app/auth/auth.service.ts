@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
-import {throwError} from "rxjs";
+import {catchError, tap} from "rxjs/operators";
+import {Subject, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+import {User} from "./user.model";
 
 export interface AuthResponseFirebase {
   kind: string;
@@ -16,9 +17,9 @@ export interface AuthResponseFirebase {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private param = {'key': environment.keyFirebase};
+  user = new Subject<User>();
 
-  //private errorMsg = 'An unknown error occurred!';
+  private param = {'key': environment.keyFirebase};
 
   constructor(private http: HttpClient) {
   }
@@ -35,7 +36,7 @@ export class AuthService {
       {
         params: this.param
       })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleError), tap(this.handleAuthentication));
   }
 
   login(email: string, password: string) {
@@ -50,7 +51,13 @@ export class AuthService {
       {
         params: this.param
       })
-    .pipe(catchError(this.handleError));
+    .pipe(catchError(this.handleError), tap(this.handleAuthentication));
+  }
+
+  private handleAuthentication(resData: AuthResponseFirebase) {
+    const user = new User(resData.email, resData.localId, resData.idToken,
+      this.calcExpirationDate(resData));
+    this.user.next(user);
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -72,7 +79,7 @@ export class AuthService {
       case 'TOO_MANY_ATTEMPTS_TRY_LATER':
         errorMsg = 'Too many attempts, try later!';
         break;
-        // error cases from login
+      // error cases from login
       case 'EMAIL_NOT_FOUND':
         errorMsg = 'Cannot find account with this email!';
         break;
@@ -85,5 +92,9 @@ export class AuthService {
     }
 
     return throwError(errorMsg);
+  }
+
+  private calcExpirationDate(resData: AuthResponseFirebase): Date {
+    return new Date(new Date().getTime() + +resData.expiresIn * 1000);
   }
 }
