@@ -1,7 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 import {catchError, tap} from "rxjs/operators";
 import {BehaviorSubject, throwError} from "rxjs";
+
 import {environment} from "../../environments/environment";
 
 import {User} from "./user.model";
@@ -22,7 +24,9 @@ export class AuthService {
 
   private param = {'key': environment.keyFirebase};
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router) {
   }
 
   signup(email: string, password: string) {
@@ -73,6 +77,11 @@ export class AuthService {
         );
       })
     );
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAuthentication(email: string, userId: string, token: string,

@@ -12,7 +12,7 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <button mat-button *ngIf="isAuthenticated">Logout</button>
+  <button mat-button *ngIf="isAuthenticated" (click)="onLogout()">Logout</button>
   <button mat-button *ngIf="isAuthenticated" [mat-menu-trigger-for]="Option">
     Option
   </button>
