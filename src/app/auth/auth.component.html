@@ -1,6 +1,8 @@
-<div *ngIf="error">
-  <p>{{ error }}</p>
-</div>
+<!--<div *ngIf="error">-->
+<!--  <p>{{ error }}</p>-->
+<!--</div>-->
+
+<!--<app-alert [message]="error" *ngIf="this.error" (click)="onHandleError()"></app-alert>-->
 
 <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading" class="auth-form">
   <mat-form-field>

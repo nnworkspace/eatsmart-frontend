@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {
   MatButtonModule,
+  MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
   MatInputModule,
@@ -31,6 +32,7 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {RecipeService} from "./recipes/recipe.service";
 import {AuthComponent} from './auth/auth.component';
 import {AuthInterceptorService} from "./auth/auth-interceptor.service";
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {AuthInterceptorService} from "./auth/auth-interceptor.service";
     ShoppingEditComponent,
     RecipeHomeComponent,
     RecipeEditComponent,
-    AuthComponent
+    AuthComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,13 @@ import {AuthInterceptorService} from "./auth/auth-interceptor.service";
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code-
+    // for more info
+    AlertComponent
   ],
   providers: [
     RecipeService,
