@@ -1,9 +1,3 @@
-<!--<div *ngIf="error">-->
-<!--  <p>{{ error }}</p>-->
-<!--</div>-->
-
-<!--<app-alert [message]="error" *ngIf="this.error" (click)="onHandleError()"></app-alert>-->
-
 <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading" class="auth-form">
   <mat-form-field>
     <input matInput type="email" id="email" ngModel name="email" required email

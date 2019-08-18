@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 export interface AlertData {
@@ -12,8 +12,6 @@ export interface AlertData {
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-  // message: string;
-  // @Output() close = new EventEmitter<void>();
 
   constructor(
     public alertRef: MatDialogRef<AlertComponent>,
@@ -23,10 +21,6 @@ export class AlertComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // onClose() {
-  //   this.close.emit();
-  // }
 
   onCloseClick(): void {
     this.alertRef.close();

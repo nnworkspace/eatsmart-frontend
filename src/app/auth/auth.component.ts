@@ -16,7 +16,6 @@ import {error} from "util";
 export class AuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
-  // error: string = null;
 
   constructor(private authService: AuthService, private router: Router,
     private dialog: MatDialog) {
@@ -52,7 +51,6 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/recipes']);
       }, errorMsg => {
         console.log(errorMsg);
-        // this.error = errorMsg;
         this.showErrorAlert(errorMsg);
         this.isLoading = false;
       });
@@ -77,7 +75,4 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  // onHandleError() {
-  //   this.error = null;
-  // }
 }
