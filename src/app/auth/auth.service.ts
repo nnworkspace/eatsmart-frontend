@@ -5,8 +5,11 @@ import {catchError, tap} from "rxjs/operators";
 import {BehaviorSubject, throwError} from "rxjs";
 
 import {environment} from "../../environments/environment";
+import * as reduxApp from '../redux/app.reducer';
+import * as AuthActions from './redux/auth.actions';
 
 import {User} from "./user.model";
+import {Store} from "@ngrx/store";
 
 export interface AuthResponseFirebase {
   kind: string;
@@ -20,14 +23,15 @@ export interface AuthResponseFirebase {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  user = new BehaviorSubject<User>(null);
+  // user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   private param = {'key': environment.keyFirebase};
 
   constructor(
     private http: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private redux: Store<reduxApp.AppState>) {
   }
 
   signup(email: string, password: string) {
@@ -95,7 +99,14 @@ export class AuthService {
       new Date(userData._tokenExpirationDate));
 
     if (loadedUser.token) {
-      this.user.next(loadedUser);
+      //this.user.next(loadedUser);
+
+      this.redux.dispatch(new AuthActions.Login({
+        email: loadedUser.email,
+        userId: loadedUser.id,
+        token: loadedUser.token,
+        expirationDate: new Date(userData._tokenExpirationDate)
+      }));
 
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime()
         - new Date().getTime();
@@ -104,7 +115,9 @@ export class AuthService {
   }
 
   logout() {
-    this.user.next(null);
+    // this.user.next(null);
+    this.redux.dispatch(new AuthActions.Logout());
+
     this.router.navigate(['/auth']);
 
     // clear ...
@@ -125,7 +138,15 @@ export class AuthService {
                                expiresIn: number) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
-    this.user.next(user);
+    //this.user.next(user);
+
+    this.redux.dispatch(new AuthActions.Login({
+      email: email,
+      userId: userId,
+      token: token,
+      expirationDate: expirationDate
+    }));
+
     this.autoLogout(expiresIn * 1000);
 
     // enable auto login

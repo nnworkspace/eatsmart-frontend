@@ -1,20 +1,28 @@
 import {Injectable} from "@angular/core";
 import {HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from "@angular/common/http";
+import {exhaustMap, map, take} from "rxjs/operators";
+import {Store} from "@ngrx/store";
+import * as reduxApp from '../redux/app.reducer';
+
 import {AuthService} from "./auth.service";
-import {exhaustMap, take} from "rxjs/operators";
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor{
 
-  constructor(private authService: AuthService) {
-
+  constructor(
+    private authService: AuthService,
+    private redux: Store<reduxApp.AppState>) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return this.authService.user.pipe(
+    return this.redux.select('auth').pipe(
       take(1),
-      exhaustMap(user => {
 
+      map(authState => {
+        return authState.user;
+      }),
+
+      exhaustMap(user => {
         if (!user) {
           return next.handle(req);
         }
@@ -25,6 +33,7 @@ export class AuthInterceptorService implements HttpInterceptor{
 
         return next.handle(modifiedReq);
       })
+
     );
   }
 
