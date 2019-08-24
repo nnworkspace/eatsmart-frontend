@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
-import * as SlActions from "../store/shopping-list.actions";
-import * as fromShoppingList from "../store/shopping-list.reducer";
+import * as reduxApp from "../../redux/app.reducer";
+import * as SlActions from "../redux/shopping-list.actions";
 
 import {Ingredient} from "../../shared/ingredient.model";
 
@@ -17,12 +17,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', {static: false}) slForm: NgForm;
   subscriptionEdit: Subscription;
   editMode = false;
-  // editedItemIndex: number;
   editedItem: Ingredient;
 
   constructor(
-    // private slService: ShoppingListService,
-    private store: Store<fromShoppingList.AppState>) {
+    private store: Store<reduxApp.AppState>) {
   }
 
   ngOnInit() {
@@ -42,19 +40,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.editMode = false;
       }
     });
-
-    // this.subscriptionEdit = this.slService.startedEditing.subscribe(
-    //   (index: number) => {
-    //     this.editedItemIndex = index;
-    //     this.editMode = true;
-    //     this.editedItem = this.slService.getIngredient(index);
-    //     this.slForm.setValue({
-    //       name: this.editedItem.name,
-    //       amount: this.editedItem.amount,
-    //       unit: this.editedItem.amountUnit
-    //     });
-    //   }
-    // );
   }
 
   ngOnDestroy(): void {
