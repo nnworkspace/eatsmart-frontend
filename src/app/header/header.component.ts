@@ -3,7 +3,7 @@ import {Subscription} from "rxjs";
 import {map} from "rxjs/operators";
 import {Store} from "@ngrx/store";
 import * as reduxApp from '../redux/app.reducer';
-
+import * as AuthActions from '../auth/redux/auth.actions';
 
 import {DataStorageService} from "../shared/data-storage.service";
 import {AuthService} from "../auth/auth.service";
@@ -46,6 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout();
+    this.redux.dispatch(new AuthActions.Logout());
   }
 }

@@ -2,13 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {MatDialog} from "@angular/material";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 
 import * as reduxApp from '../redux/app.reducer';
 import * as AuthActions from './redux/auth.actions';
 
-import {AuthResponseFirebase, AuthService} from "./auth.service";
+import {AuthService} from "./auth.service";
 import {AlertComponent} from "../shared/alert/alert.component";
 
 @Component({
@@ -20,12 +20,14 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isLoading = false;
 
+  private reduxSub: Subscription;
+
   constructor(private authService: AuthService, private router: Router,
               private dialog: MatDialog, private redux: Store<reduxApp.AppState>) {
   }
 
   ngOnInit() {
-    this.redux.select('auth').subscribe(authState => {
+    this.reduxSub = this.redux.select('auth').subscribe(authState => {
       this.isLoading = authState.loading;
       if (authState.authError) {
         this.showErrorAlert(authState.authError);
@@ -33,7 +35,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
+    if (this.reduxSub) {
+      this.reduxSub.unsubscribe();
+    }
   }
 
   onSwitchMode() {
@@ -48,10 +53,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     const email = authForm.value.email;
     const password = authForm.value.password;
 
-    let authObs: Observable<AuthResponseFirebase>;
-
-    this.isLoading = true;
-
     if (this.isLoginMode) {
       //authObs = this.authService.login(email, password);
       this.redux.dispatch(new AuthActions.LoginStart({
@@ -60,21 +61,14 @@ export class AuthComponent implements OnInit, OnDestroy {
         })
       );
     } else {
-      authObs = this.authService.signup(email, password);
+      this.redux.dispatch(new AuthActions.SignupStart({
+          email: email,
+          password: password
+        })
+      );
     }
 
     this.redux.select('auth').subscribe();
-
-    // authObs.subscribe(
-    //   resData => {
-    //     console.log(resData);
-    //     this.isLoading = false;
-    //     this.router.navigate(['/recipes']);
-    //   }, errorMsg => {
-    //     console.log(errorMsg);
-    //     this.showErrorAlert(errorMsg);
-    //     this.isLoading = false;
-    //   });
 
     authForm.reset();
   }
