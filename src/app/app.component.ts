@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "./auth/auth.service";
+import {Store} from "@ngrx/store";
+
+import * as reduxApp from "./redux/app.reducer";
+import * as AuthActions from './auth/redux/auth.actions';
+
 import {LoggingService} from "./logging.service";
 
 @Component({
@@ -8,12 +12,11 @@ import {LoggingService} from "./logging.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-  constructor(private authService: AuthService, private log: LoggingService) {
+  constructor(private redux: Store<reduxApp.AppState>, private log: LoggingService) {
   }
 
   ngOnInit() {
-    this.authService.autoLogin();
+    this.redux.dispatch(new AuthActions.AutoLogin());
 
     this.log.printLog('hello from AppComponent ngOnInit');
   }

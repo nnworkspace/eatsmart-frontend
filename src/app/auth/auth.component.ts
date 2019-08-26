@@ -1,14 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {MatDialog} from "@angular/material";
-import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 
 import * as reduxApp from '../redux/app.reducer';
 import * as AuthActions from './redux/auth.actions';
 
-import {AuthService} from "./auth.service";
 import {AlertComponent} from "../shared/alert/alert.component";
 
 @Component({
@@ -22,8 +20,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private reduxSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router,
-              private dialog: MatDialog, private redux: Store<reduxApp.AppState>) {
+  constructor(private dialog: MatDialog, private redux: Store<reduxApp.AppState>) {
   }
 
   ngOnInit() {
