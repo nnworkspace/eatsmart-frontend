@@ -16,6 +16,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from "./header/header.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthEffects} from "./auth/redux/auth.effects";
+import {RecipeEffects} from "./recipes/redux/recipe.effects";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {AuthEffects} from "./auth/redux/auth.effects";
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(reduxApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),
     BrowserAnimationsModule,

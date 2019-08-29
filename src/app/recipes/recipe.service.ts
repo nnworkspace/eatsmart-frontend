@@ -40,15 +40,6 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.notifyObservers();
-  }
-
-  getRecipe(idx: number) {
-    return this.recipes[idx];
-  }
-
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.store.dispatch(new SlActions.AddIngredientList(ingredients));
   }

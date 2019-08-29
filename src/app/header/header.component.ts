@@ -4,9 +4,7 @@ import {map} from "rxjs/operators";
 import {Store} from "@ngrx/store";
 import * as reduxApp from '../redux/app.reducer';
 import * as AuthActions from '../auth/redux/auth.actions';
-
-import {DataStorageService} from "../shared/data-storage.service";
-import {AuthService} from "../auth/auth.service";
+import * as RecipeActions from '../recipes/redux/recipe.actions';
 
 
 @Component({
@@ -19,8 +17,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
 
   constructor(
-    private dsService: DataStorageService,
-    private authService: AuthService,
     private redux: Store<reduxApp.AppState>) {
   }
 
@@ -38,11 +34,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dsService.storeRecipes();
+    // this.dsService.storeRecipes();
+    this.redux.dispatch(new RecipeActions.StoreRecipes());
   }
 
   onFetchData() {
-    this.dsService.fetchRecipes().subscribe();
+    // this.dsService.fetchRecipes().subscribe();
+    this.redux.dispatch(new RecipeActions.FetchRecipes());
   }
 
   onLogout() {
