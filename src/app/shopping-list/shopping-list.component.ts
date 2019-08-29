@@ -7,7 +7,6 @@ import * as reduxApp from '../redux/app.reducer';
 import * as SlActions from './redux/shopping-list.actions';
 
 import {Ingredient} from "../shared/ingredient.model";
-import {ShoppingListService} from "./shopping-list.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -18,7 +17,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Observable<{ ingredients: Ingredient[] }>;
 
   constructor(
-    private slService: ShoppingListService,
     private log: LoggingService,
     private store: Store<reduxApp.AppState>) {
   }

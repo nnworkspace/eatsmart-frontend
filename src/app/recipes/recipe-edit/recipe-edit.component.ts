@@ -6,7 +6,6 @@ import {Store} from "@ngrx/store";
 import * as reduxApp from '../../redux/app.reducer';
 import * as RecipeActions from '../redux/recipe.actions';
 
-import {RecipeService} from "../recipe.service";
 import {Ingredient} from "../../shared/ingredient.model";
 import {map} from "rxjs/operators";
 
@@ -23,7 +22,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private reduxSub: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService,
               private router: Router,
               private redux: Store<reduxApp.AppState>) {
   }
