@@ -54,7 +54,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onAddToShoppingList() {
     // this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
-    this.redux.dispatch(new SlActions.AddIngredientList(this.recipe.ingredients));
+    this.redux.dispatch(SlActions.addIngredientList({ingredients: this.recipe.ingredients}));
   }
 
   onEditRecipe() {
