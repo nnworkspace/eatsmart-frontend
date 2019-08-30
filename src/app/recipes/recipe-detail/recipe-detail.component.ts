@@ -67,7 +67,7 @@ export class RecipeDetailComponent implements OnInit {
   onDeleteRecipe() {
     //this.recipeService.deleteRecipe(this.id);
 
-    this.redux.dispatch(new RecipeActions.DeleteRecipe(this.id));
+    this.redux.dispatch(RecipeActions.deleteRecipe({index: this.id}));
     this.router.navigate(['/recipes']);
   }
 }

@@ -34,13 +34,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    // this.dsService.storeRecipes();
-    this.redux.dispatch(new RecipeActions.StoreRecipes());
+    this.redux.dispatch(RecipeActions.storeRecipes());
   }
 
   onFetchData() {
-    // this.dsService.fetchRecipes().subscribe();
-    this.redux.dispatch(new RecipeActions.FetchRecipes());
+    this.redux.dispatch(RecipeActions.fetchRecipes());
   }
 
   onLogout() {

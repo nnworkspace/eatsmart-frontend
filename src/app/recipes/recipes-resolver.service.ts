@@ -12,7 +12,7 @@ import {Recipe} from "./recipe.model";
 
 
 @Injectable({providedIn: 'root'})
-export class RecipesResolverService implements Resolve<Recipe[]> {
+export class RecipesResolverService implements Resolve<{recipes: Recipe[]}> {
 
   constructor(private redux: Store<reduxApp.AppState>, private actions$: Actions) {
   }
@@ -26,15 +26,15 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
       }),
       switchMap(recipes => {
         if (recipes.length === 0) {
-          this.redux.dispatch(new RecipeActions.FetchRecipes());
+          this.redux.dispatch(RecipeActions.fetchRecipes());
           return this.actions$.pipe(
             // listen to the SetRecipes action
-            ofType(RecipeActions.SET_RECIPES),
+            ofType(RecipeActions.setRecipes),
             take(1)
           );
         } else {
           // don't send any request, if we already have recipes.
-          return of(recipes);
+          return of({recipes: recipes});
         }
       })
     );

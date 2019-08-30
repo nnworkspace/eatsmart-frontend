@@ -39,7 +39,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.reduxSub) {
+    if (this.reduxSub) {
       this.reduxSub.unsubscribe();
     }
   }
@@ -47,13 +47,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.editMode) {
       //this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-      this.redux.dispatch(new RecipeActions.UpdateRecipe({
+      this.redux.dispatch(RecipeActions.updateRecipe({
         index: this.id,
-        newRecipe: this.recipeForm.value
+        recipe: this.recipeForm.value
       }));
     } else {
       //this.recipeService.addRecipe(this.recipeForm.value);
-      this.redux.dispatch(new RecipeActions.AddRecipe(this.recipeForm.value));
+      this.redux.dispatch(RecipeActions.addRecipe({recipe: this.recipeForm.value}));
     }
 
     // done, simply navigate away
