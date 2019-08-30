@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.redux.dispatch(new AuthActions.AutoLogin());
+    this.redux.dispatch(AuthActions.autoLogin());
 
     this.log.printLog('hello from AppComponent ngOnInit');
   }

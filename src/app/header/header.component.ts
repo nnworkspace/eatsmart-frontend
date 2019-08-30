@@ -44,6 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.redux.dispatch(new AuthActions.Logout());
+    this.redux.dispatch(AuthActions.logout());
   }
 }

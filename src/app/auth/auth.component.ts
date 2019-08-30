@@ -52,13 +52,13 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     if (this.isLoginMode) {
       //authObs = this.authService.login(email, password);
-      this.redux.dispatch(new AuthActions.LoginStart({
+      this.redux.dispatch(AuthActions.loginStart({
           email: email,
           password: password
         })
       );
     } else {
-      this.redux.dispatch(new AuthActions.SignupStart({
+      this.redux.dispatch(AuthActions.signupStart({
           email: email,
           password: password
         })

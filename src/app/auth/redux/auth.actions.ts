@@ -1,66 +1,99 @@
-import {Action} from "@ngrx/store";
+import {createAction, props} from "@ngrx/store";
 
-export const SIGNUP_START = '[auth] signup start';
-export const LOGIN_START = '[auth] login start';
-export const AUTH_SUCCESS = '[auth] authenticate success';
-export const AUTH_FAIL = '[auth] authenticate fail';
-export const LOGOUT = '[auth] logout';
-export const CLEAR_ERROR = '[auth] clear error';
-export const AUTO_LOGIN = '[auth] auto login';
+export const loginStart = createAction(
+  '[auth] Login Start',
+  props<{ email: string; password: string }>()
+);
 
-export class SignupStart implements Action {
-  readonly type = SIGNUP_START;
+export const signupStart = createAction(
+  '[auth] Signup Start',
+  props<{ email: string; password: string }>()
+);
 
-  constructor(public payload: { email: string; password: string }) {
-  }
-}
+export const authenticateSuccess = createAction(
+  '[auth] authenticate Success',
+  props<{
+    email: string;
+    userId: string;
+    token: string;
+    expirationDate: Date;
+    redirect: boolean
+  }>()
+);
 
-export class AuthSuccess implements Action {
-  readonly type = AUTH_SUCCESS;
+export const authenticateFail = createAction(
+  '[auth] authenticate Fail',
+  props<{ errorMessage: string }>()
+);
 
-  constructor(
-    public payload: {
-      email: string;
-      userId: string;
-      token: string;
-      expirationDate: Date;
-      redirect: boolean;
-    }
-  ) {
-  }
-}
+export const clearError = createAction('[auth] Clear Error');
 
-export class Logout implements Action {
-  readonly type = LOGOUT;
-}
+export const autoLogin = createAction('[auth] Auto Login');
 
-export class LoginStart implements Action {
-  readonly type = LOGIN_START;
+export const logout = createAction('[auth] Logout');
 
-  constructor(public payload: { email: string; password: string }) {
-  }
-}
 
-export class AuthFail implements Action {
-  readonly type = AUTH_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
-
-export class ClearError implements Action {
-  readonly type = CLEAR_ERROR;
-}
-
-export class AutoLogin implements Action {
-  readonly type = AUTO_LOGIN;
-}
-
-export type AuthActions =
-  SignupStart
-  | AuthSuccess
-  | Logout
-  | LoginStart
-  | AuthFail
-  | ClearError
-  | AutoLogin;
+// export const SIGNUP_START = '[auth] signup start';
+// export const LOGIN_START = '[auth] login start';
+// export const AUTH_SUCCESS = '[auth] authenticate success';
+// export const AUTH_FAIL = '[auth] authenticate fail';
+// export const LOGOUT = '[auth] logout';
+// export const CLEAR_ERROR = '[auth] clear error';
+// export const AUTO_LOGIN = '[auth] auto login';
+//
+// export class SignupStart implements Action {
+//   readonly type = SIGNUP_START;
+//
+//   constructor(public payload: { email: string; password: string }) {
+//   }
+// }
+//
+// export class AuthSuccess implements Action {
+//   readonly type = AUTH_SUCCESS;
+//
+//   constructor(
+//     public payload: {
+//       email: string;
+//       userId: string;
+//       token: string;
+//       expirationDate: Date;
+//       redirect: boolean;
+//     }
+//   ) {
+//   }
+// }
+//
+// export class Logout implements Action {
+//   readonly type = LOGOUT;
+// }
+//
+// export class LoginStart implements Action {
+//   readonly type = LOGIN_START;
+//
+//   constructor(public payload: { email: string; password: string }) {
+//   }
+// }
+//
+// export class AuthFail implements Action {
+//   readonly type = AUTH_FAIL;
+//
+//   constructor(public payload: string) {
+//   }
+// }
+//
+// export class ClearError implements Action {
+//   readonly type = CLEAR_ERROR;
+// }
+//
+// export class AutoLogin implements Action {
+//   readonly type = AUTO_LOGIN;
+// }
+//
+// export type AuthActions =
+//   SignupStart
+//   | AuthSuccess
+//   | Logout
+//   | LoginStart
+//   | AuthFail
+//   | ClearError
+//   | AutoLogin;
